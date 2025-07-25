@@ -7,43 +7,69 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .navbar {
+            background: linear-gradient(to right, #ff8a00, #da1b60);
+            color: white;
+        }
+        .btn-primary {
+            background-color: #da1b60;
+            border-color: #da1b60;
+        }
+        .btn-outline:hover {
+            background-color: #ff8a00;
+            border-color: #ff8a00;
+            color: white;
+        }
+        footer {
+            background: linear-gradient(to right, #da1b60, #ff8a00);
+            color: white;
+        }
+        a.link-hover:hover {
+            color: #ffe082;
+        }
+    </style>
 </head>
-<body class="min-h-screen bg-base-100">
+<body class="min-h-screen bg-gradient-to-b from-white to-gray-100 text-gray-800">
     <!-- Navigation Bar -->
-    <div class="navbar bg-base-100 shadow-lg">
+    <div class="navbar shadow-lg sticky top-0 z-50">
         <div class="navbar-start">
             <div class="dropdown">
-                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                <div tabindex="0" role="button" class="btn btn-ghost lg:hidden text-white">
                     <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
                     </svg>
                 </div>
-                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white rounded-box w-52">
                     <li><a href="{% url 'home' %}">Home</a></li>
                     <li><a href="{% url 'product_list' %}">Products</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'wishlist' %}">Wishlist</a></li>
                         <li><a href="{% url 'profile' %}">Profile</a></li>
                     {% endif %}
+                    <li><a href="{% url 'about' %}">About</a></li>
                 </ul>
             </div>
-            <a href="{% url 'home' %}" class="btn btn-ghost text-xl">
-                <i class="fas fa-tshirt text-primary"></i>
-                ChazeFashion
+            <a href="{% url 'home' %}" class="btn btn-ghost text-2xl font-extrabold text-white">
+                <i class="fas fa-tshirt"></i> ChazeFashion
             </a>
         </div>
-        
+
         <div class="navbar-center hidden lg:flex">
-            <ul class="menu menu-horizontal px-1">
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'product_list' %}">Products</a></li>
+            <ul class="menu menu-horizontal px-1 text-lg font-medium">
+                <li><a href="{% url 'home' %}" class="text-white hover:text-yellow-200">Home</a></li>
+                <li><a href="{% url 'product_list' %}" class="text-white hover:text-yellow-200">Products</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'wishlist' %}">Wishlist</a></li>
-                    <li><a href="{% url 'profile' %}">Profile</a></li>
+                    <li><a href="{% url 'wishlist' %}" class="text-white hover:text-yellow-200">Wishlist</a></li>
+                    <li><a href="{% url 'profile' %}" class="text-white hover:text-yellow-200">Profile</a></li>
                 {% endif %}
+                <li><a href="{% url 'about' %}" class="text-white hover:text-yellow-200">About</a></li>
             </ul>
         </div>
-        
+
         <div class="navbar-end">
             {% if user.is_authenticated %}
                 <div class="dropdown dropdown-end">
@@ -52,21 +78,21 @@
                             {% if user.userprofile.avatar %}
                                 <img src="{{ user.userprofile.avatar.url }}" alt="{{ user.username }}" />
                             {% else %}
-                                <div class="bg-primary text-primary-content rounded-full w-10 h-10 flex items-center justify-center">
+                                <div class="bg-white text-da1b60 rounded-full w-10 h-10 flex items-center justify-center">
                                     <span class="text-lg font-bold">{{ user.username|first|upper }}</span>
                                 </div>
                             {% endif %}
                         </div>
                     </div>
-                    <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white rounded-box w-52">
                         <li><a href="{% url 'profile' %}">Profile</a></li>
                         <li><a href="{% url 'wishlist' %}">Wishlist</a></li>
                         <li><a href="{% url 'logout' %}">Logout</a></li>
                     </ul>
                 </div>
             {% else %}
-                <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
-                <a href="{% url 'signup' %}" class="btn btn-outline ml-2">Sign Up</a>
+                <a href="{% url 'login' %}" class="btn btn-outline text-white border-white">Login</a>
+                <a href="{% url 'signup' %}" class="btn btn-primary ml-2">Sign Up</a>
             {% endif %}
         </div>
     </div>
@@ -92,13 +118,37 @@
     {% endif %}
 
     <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8">
+    <main class="container mx-auto px-4 py-10">
         {% block content %}
         {% endblock %}
     </main>
 
+  <!-- Hero Section Start -->
+<section class="hero min-h-[60vh] bg-gradient-to-r from-orange-700 via-orange-500 to-orange-300 text-white">
+
+  <div class="max-w-3xl text-center">
+    <div class="mb-6">
+      <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight leading-tight mb-4">
+        <i class="fa-solid fa-shirt text-red-400 mr-2"></i>Welcome to <span class="text-pink-300">ChazeFashion</span>
+      </h1>
+      <p class="text-lg md:text-xl text-pink-100">
+        Elevate your wardrobe with our exclusive collection. Fashion that speaks your style, whether it's chic, casual, or formal.
+      </p>
+    </div>
+    <div class="mt-8">
+      <a href="#shop" class="btn btn-primary bg-pink-600 hover:bg-pink-700 border-none text-white text-lg px-8 py-3 rounded-lg shadow-lg transition-all duration-300">
+        <i class="fa-solid fa-cart-shopping mr-2"></i> Shop Now
+      </a>
+    </div>
+  </div>
+</section>
+<!-- Hero Section End -->
+
+
+
+
     <!-- Footer -->
-    <footer class="footer footer-center p-10 bg-base-200 text-base-content rounded">
+    <footer class="footer footer-center p-10 text-white rounded-t-xl shadow-inner">
         <nav class="grid grid-flow-col gap-4">
             <a href="{% url 'home' %}" class="link link-hover">Home</a>
             <a href="{% url 'product_list' %}" class="link link-hover">Products</a>
@@ -112,14 +162,14 @@
         </nav> 
         <nav>
             <div class="grid grid-flow-col gap-4">
-                <a href="#"><i class="fab fa-twitter text-xl"></i></a>
-                <a href="#"><i class="fab fa-instagram text-xl"></i></a>
-                <a href="#"><i class="fab fa-facebook text-xl"></i></a>
+                <a href="#"><i class="fab fa-twitter text-xl hover:text-yellow-300"></i></a>
+                <a href="#"><i class="fab fa-instagram text-xl hover:text-yellow-300"></i></a>
+                <a href="#"><i class="fab fa-facebook text-xl hover:text-yellow-300"></i></a>
             </div>
         </nav> 
         <aside>
-            <p>Copyright © 2024 - All rights reserved by ChazeFashion</p>
+            <p>&copy; 2025 ChazeFashion. All rights reserved.</p>
         </aside>
     </footer>
 </body>
-</html> 
+</html>

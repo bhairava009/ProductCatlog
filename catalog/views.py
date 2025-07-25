@@ -52,6 +52,12 @@ def user_login(request):
     
     return render(request, 'catalog/login.html')
 
+from django.shortcuts import render
+
+def about_view(request):
+    return render(request, 'about.html')
+
+
 @login_required
 def user_logout(request):
     """User logout"""

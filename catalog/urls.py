@@ -12,6 +12,9 @@ urlpatterns = [
     
     # User profile
     path('profile/', views.profile, name='profile'),
+
+    #About
+    path('about/', views.about_view, name='about'),
     
     # Products
     path('products/', views.product_list, name='product_list'),
